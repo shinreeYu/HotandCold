@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot and Cold Game by Isaac Zeng</title>
+    <style>
+        table, th, td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    <script>
+        function initialize()
+        {
+            numberOutput = document.getElementById("number")
+            guessOutput = document.getElementById("guess")
+            guessLeftOutput = document.getElementById("guessLeft")
+            row1col1 = document.getElementById("r1c1")
+            row1col2 = document.getElementById("r1c2")
+            row2col1 = document.getElementById("r2c1")
+            row2col2 = document.getElementById("r2c2")
+            row3col1 = document.getElementById("r3c1")
+            row3col2 = document.getElementById("r3c2")
+            row4col1 = document.getElementById("r4c1")
+            row4col2 = document.getElementById("r4c2")
+            row5col1 = document.getElementById("r5c1")
+            row5col2 = document.getElementById("r5c2")
+            
+            response = ""
+            guess = 50
+            guessRemaining = 5
+            
+            randNum = Math.floor(Math.random() * 100) + 1
+
+            display()
+
+        }
+
+        function addOne()
+        {
+            guess += 1
+            display()
+        }
+
+        function addFive()
+        {
+            guess += 5
+            display()
+        }
+
+        function addTen()
+        {
+            guess += 10
+            display()
+        }
+
+        function addTwentyFive()
+        {
+            guess += 25
+            display()
+        }
+
+        function subOne()
+        {
+            guess += -1
+            display()
+        }
+
+        function subFive()
+        {
+            guess += -5
+            display()
+        }
+
+        function subTen()
+        {
+            guess += -10
+            display()
+        }
+
+        function subTwentyFive()
+        {
+            guess += -25
+            display()
+        }
+
+        function resetBut()
+        {
+            guess = 50
+            
+            display()
+        }
+
+        function commitBut()
+        {
+            if(guess > 100 && guessRemaining >= 1)
+            {
+                window.alert("Invalid guess! Only choose numbers between 1 and 100")
+            }
+            else if (guess < 1 && guessRemaining >= 1)
+            {
+                window.alert("Invalid guess! Only choose numbers between 1 and 100")
+            }
+
+            if(guess == randNum)
+            {
+                response = "You won!"
+
+            }
+            else if(Math.abs(randNum - guess) <= 5)
+            {
+                response = "very Hot"
+
+            }
+            else if(Math.abs(randNum - guess) >= 6 && Math.abs(randNum - guess)  <= 8)
+            {
+                response = "Hot"
+
+            }
+            else if(Math.abs(randNum - guess)  >= 9 && Math.abs(randNum - guess)  <= 15)
+            {
+                response = "Very Warm"
+
+            }
+            else if(Math.abs(randNum - guess)  >= 16 && Math.abs(randNum - guess)  <= 20)
+            {
+                response = "Warm"
+
+            }
+            else if(Math.abs(randNum - guess)  >= 21 && Math.abs(randNum - guess)  <=30)
+            {
+                response = "Cool"
+
+            }
+            else if(Math.abs(randNum - guess)  >= 31 && Math.abs(randNum - guess)  <= 40)
+            {
+                response = "Very Cool"
+
+            }
+            else if(Math.abs(randNum - guess)  >= 41 && Math.abs(randNum - guess) <= 55)
+            {
+                response = "Cold"
+
+            }
+            else
+            {
+                response = "Very Cold"
+
+            }
+
+            if(guessRemaining == 5 && guess <= 100  && guess >= 100)
+            {
+                changeRow1()
+                guessRemaining -= 1
+            }
+            else if (guessRemaining == 4 && guess <= 100  && guess >= 100)
+            {
+                changeRow2()
+                guessRemaining -= 1
+            }
+            else if(guessRemaining == 3 && guess <= 100  && guess >= 100)
+            {
+                changeRow3()
+                guessRemaining -= 1
+            }
+            else if(guessRemaining == 2 && guess <= 100  && guess >= 100)
+            {
+                changeRow4()
+                guessRemaining -= 1
+            }
+            else if(guessRemaining == 1 && guess <= 100  && guess >= 100)
+            {
+                changeRow5()
+                guessRemaining -= 1
+            }
+            else if(guessRemaining == 0 && guess <= 100  && guess >= 100)
+            {
+                window.alert("You are out of guesses!")
+            }
+
+            display()
+            response = ""
+        }
+
+        function changeRow1()
+        {
+            row1col1.innerHTML = guess
+            row1col2.innerHTML = response
+        }
+
+        function changeRow2()
+        {
+            row2col1.innerHTML = guess
+            row2col2.innerHTML = response
+        }
+
+        function changeRow3()
+        {
+            row3col1.innerHTML = guess
+            row3col2.innerHTML = response
+        }
+
+        function changeRow4()
+        {
+            row4col1.innerHTML = guess
+            row4col2.innerHTML = response
+        }
+
+        function changeRow5()
+        {
+            row5col1.innerHTML = guess
+            row5col2.innerHTML = response
+        }
+
+        function display()
+        {
+            numberOutput.innerHTML = randNum
+            guessOutput.innerHTML = guess
+            guessLeftOutput.innerHTML = guessRemaining
+        }
+    </script>
+</head>
+<body onload="initialize()">
+    <h3><div id="number"></div></h3>
+    <div>
+        <span>Current Guess: </span>
+        <b id="guess"> </b>
+    </div>
+    <div>
+        <span>Guesses Left: </span>
+        <b id="guessLeft"></b>
+    </div>
+    <table id="log">
+        <tr>
+            <th>
+                Guess Log
+            </th>
+            <th>
+                Response Log
+            </th>
+        </tr>
+        <tr>
+            <td id="r1c1">
+                Testing
+            </td>
+            <td id="r1c2">
+                Testing 2
+            </td>
+        </tr>
+        <tr>
+            <td id="r2c1">
+                Testing row 2
+            </td>
+            <td id="r2c2">
+                Testing row 2 col 2
+            </td>
+        </tr>
+        <tr>
+            <td id="r3c1">
+                Testing row 3
+            </td>
+            <td id="r3c2">
+                Testing row 3 col 2
+            </td>
+        </tr>
+        <tr>
+            <td id="r4c1">
+                Testing row 4
+            </td>
+            <td id="r4c2">
+                Testing row 4 col 2
+            </td>
+        </tr>
+        <tr>
+            <td id="r5c1">
+                Testing row 5
+            </td>
+            <td id="r5c2">
+                Testing row 5 col 2
+            </td>
+        </tr>
+    </table>
+    <button onclick="addOne()">+1</button>
+    <button onclick="addFive()">+5</button>
+    <button onclick="addTen()">+10</button>
+    <button onclick="addTwentyFive()">+25</button>
+    <br />
+    <button onclick="subOne()">-1</button>
+    <button onclick="subFive()">-5</button>
+    <button onclick="subTen()">-10</button>
+    <button onclick="subTwentyFive()">-25</button>
+    <br />
+    <button onclick="resetBut()">Reset</button>
+    <button onclick="commitBut()">Commit</button>
+</body>
+</html>
