@@ -32,6 +32,8 @@
             guess = 50
             guessRemaining = 5
             randNum = Math.floor(Math.random() * 100) + 1
+            win = false
+            row = 5
 
             display()
         }
@@ -108,10 +110,12 @@
             if(guess == randNum)
             {
                 response = "You won!"
+                win = true
+                window.alert("You win!")
             }
             else if(Math.abs(randNum - guess) <= 5)
             {
-                response = "very Hot"
+                response = "Very Hot"
             }
             else if(Math.abs(randNum - guess) >= 6 && Math.abs(randNum - guess)  <= 8)
             {
@@ -142,38 +146,64 @@
                 response = "Very Cold"
             }
 
-            if(guessRemaining == 5 && guess <= 100  && guess >= 1)
+            if(row == 5 && guess <= 100  && guess >= 1)
             {
                 changeRow1()
-                guessRemaining -= 1
+                if(!response == "Very Hot")
+                {
+                    guessRemaining -= 1
+                }
+                row--
             }
-            else if (guessRemaining == 4 && guess <= 100  && guess >= 1)
+            else if (row == 4 && guess <= 100  && guess >= 1)
             {
                 changeRow2()
-                guessRemaining -= 1
+                if(!response == "Very Hot")
+                {
+                    guessRemaining -= 1
+                }
+                row--
             }
-            else if(guessRemaining == 3 && guess <= 100  && guess >= 1)
+            else if(row == 3 && guess <= 100  && guess >= 1)
             {
                 changeRow3()
-                guessRemaining -= 1
+                if(!response == "Very Hot")
+                {
+                    guessRemaining -= 1
+                }
+                row--
             }
-            else if(guessRemaining == 2 && guess <= 100  && guess >= 1)
+            else if(row == 2 && guess <= 100  && guess >= 1)
             {
                 changeRow4()
-                guessRemaining -= 1
+                if(!response == "Very Hot")
+                {
+                    guessRemaining -= 1
+                }
+                row--
             }
-            else if(guessRemaining == 1 && guess <= 100  && guess >= 1)
+            else if(row == 1 && guess <= 100  && guess >= 1)
             {
                 changeRow5()
-                guessRemaining -= 1
+                if(!response == "Very Hot")
+                {
+                    guessRemaining -= 1
+                }
+                row--
             }
-            else if(guessRemaining == 0 && guess <= 100  && guess >= 1)
+            else if(row == 0 && guess <= 100  && guess >= 1)
             {
                 window.alert("You are out of guesses!")
             }
 
             display()
             response = ""
+
+            if(win)
+            {
+                numberOutput.innerHTML = randNum
+            }
+            console.log(row5col2.innerHTML)
         }
 
         function changeRow1()
@@ -208,14 +238,16 @@
 
         function display()
         {
-            numberOutput.innerHTML = randNum
             guessOutput.innerHTML = guess
             guessLeftOutput.innerHTML = guessRemaining
         }
     </script>
 </head>
 <body onload="initialize()">
-    <h3><div id="number"></div></h3>
+    <h3>
+        <span>Correct Number: </span>
+        <div id="number"> </div>
+    </h3>
     <div>
         <span>Current Guess: </span>
         <b id="guess"> </b>
@@ -235,42 +267,32 @@
         </tr>
         <tr>
             <td id="r1c1">
-                Testing
             </td>
             <td id="r1c2">
-                Testing 2
             </td>
         </tr>
         <tr>
             <td id="r2c1">
-                Testing row 2
             </td>
             <td id="r2c2">
-                Testing row 2 col 2
             </td>
         </tr>
         <tr>
             <td id="r3c1">
-                Testing row 3
             </td>
             <td id="r3c2">
-                Testing row 3 col 2
             </td>
         </tr>
         <tr>
             <td id="r4c1">
-                Testing row 4
             </td>
             <td id="r4c2">
-                Testing row 4 col 2
             </td>
         </tr>
         <tr>
             <td id="r5c1">
-                Testing row 5
             </td>
             <td id="r5c2">
-                Testing row 5 col 2
             </td>
         </tr>
     </table>
